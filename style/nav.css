@@ -1,0 +1,38 @@
+.home_text_nav{
+  text-align: center;
+  font-size: 2rem;
+  padding: 5px ;
+  border-bottom: 2px solid #a81010 ;
+}
+
+.active{
+ text-decoration: underline;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  
+  }
+
+li {
+  float: left;
+  margin-left: 20px;
+}
+
+li a {
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 10px 10px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: lightgray;
+  color: white;
+  text-decoration: none;
+  border-radius: 25px;
+}

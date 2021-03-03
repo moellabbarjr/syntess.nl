@@ -1,0 +1,44 @@
+@import "nav.css";
+@import "login.css";
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+}
+
+body {
+    background-color: rgb(229, 228, 224);
+}
+
+.form-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-row-gap: 5px;
+}
+
+.three-columns {
+    grid-template-columns: auto auto auto !important;
+}
+
+.column-wide {
+    grid-column: 2 / 4;
+}
+
+.hidden {
+    display: none;
+}
+
+.container {
+    min-height: calc(100vh - 77px);
+    padding: 0px 100px;
+    position: relative;
+    z-index: 100;
+    padding-bottom: 30px;
+}
+
+.container-center {
+    display: flex;
+    align-items: center;
+}

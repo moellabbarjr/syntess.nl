@@ -1,0 +1,81 @@
+.loginCard {
+  box-shadow: 0px 3px 6px rgba(000, 000, 000, 0.3) !important;
+  border: 2px solid #e3464c !important;
+  border-radius: 20px !important;
+  padding: 69px !important;
+  margin: 0 auto !important;
+}
+
+.loginCard .title {
+  font-size: 30px;
+  color: #a81010;
+  margin-bottom: 20px;
+}
+
+.loginCard {
+  margin-bottom: 15px;
+}
+
+.loginCard label {
+  color: black;
+  font-size: 20px;
+  margin-bottom: 7px;
+}
+
+.loginCard input {
+  background-color: transparent;
+  color: black;
+  border: 2px solid black;
+  border-radius: 20px;
+  padding: 5px 10px;
+  font-size: 20px;
+  /* width: 300px; */
+  outline: none;
+  margin-left: 0.5rem;
+}
+
+.loginCard .button-container {
+  margin-top: 30px;
+  width: 550px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.loginCard .button-container button {
+  background-color: transparent;
+  color: black;
+  border: 2px solid black;
+  border-radius: 20px;
+  padding: 5px 10px;
+  font-size: 20px;
+  width: 230px;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.loginCard .button-container button:hover {
+  background-color: #e3464c;
+  border-color: #e3464c;
+}
+.alinger {
+  margin-left: 1.0rem;
+}
+
+.align{
+  margin-right: 0.9rem;
+}
+
+/* MOBILE */
+@media only screen and (max-width: 825px) {
+  .loginCard {
+    width: 100%;
+  }
+
+  .loginCard .button-container {
+    width: 100%;
+  }
+
+  .loginCard .button-container button {
+    width: 150px;
+  }
+}
