@@ -88,9 +88,9 @@ class User
     public function insert($taak, $uren, $omschrijving){
         try{
             $stmt = $this->conn->prepare("INSERT INTO urenschrijven (taak, uren, omschrijving) VALUES ($taak, $uren, $omschrijving) ");
-            $stmt ->bindParam(":taak", $taak);
-            $stmt ->bindParam(":uren", $uren);
-            $stmt ->bindParam(":omschrijving", $omschrijving);
+            $stmt ->bindparam(":taak", $taak);
+            $stmt ->bindparam(":uren", $uren);
+            $stmt ->bindparam(":omschrijving", $omschrijving);
             $stmt->execute();
             return $stmt;
         }catch(PDOException $e){

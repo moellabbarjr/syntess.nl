@@ -42,3 +42,8 @@ body {
     display: flex;
     align-items: center;
 }
+
+.form-group .form-control{
+    width: 400px;
+    border: 1px solid black;
+}
