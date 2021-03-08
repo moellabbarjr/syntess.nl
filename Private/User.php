@@ -50,7 +50,8 @@ class User
                     $_SESSION["loggedin"] = $result[0][0];
                     $_SESSION["role"] = $result[0][5];
                     $_SESSION["job_role"] = $result[0][6];
-                    $_SESSION['name'] = $result[0][2];
+                    $_SESSION['first_name'] = $result[0][2];
+                    $_SESSION['last_name'] = $result[0][2];
                     if ($result[0][5] == 1) {
                         header("Location: Private/overzicht.php");
                     }
@@ -85,46 +86,66 @@ class User
     }
     
     //invoeren van gegevens functie
-    public function insert($taak, $uren, $omschrijving){
+    public function insert($user_id, $taak, $uren, $omschrijving){
         try{
-            $stmt = $this->conn->prepare("INSERT INTO urenschrijven (taak, uren, omschrijving) VALUES ($taak, $uren, $omschrijving) ");
-            $stmt ->bindparam(":taak", $taak);
-            $stmt ->bindparam(":uren", $uren);
-            $stmt ->bindparam(":omschrijving", $omschrijving);
+            $stmt = $this->conn->prepare("INSERT INTO urenschrijven (user_id, taak, uren, omschrijving) VALUES (:user_id ,:taak, :uren, :omschrijving) ");
+            $stmt->bindparam(":user_id", $user_id);
+            $stmt->bindparam(":taak", $taak);
+            $stmt->bindparam(":uren", $uren);
+            $stmt->bindparam(":omschrijving", $omschrijving);
             $stmt->execute();
+            // var_dump($user_id);
+            // exit('gaat iets fout');
+         
             return $stmt;
         }catch(PDOException $e){
             echo $e->getMessage();
         }
     }
 
-    //wijzigen van de gegevens
-    public function update($taak, $uren, $omschrijving, $user_id){
+    public function getrecordsbyid($id) {
         try{
-            $stmt = $this->conn->prepare("UPDATE urenschrijven SET taak = :taak, email = :email, omschrijving = :omschrijving WHERE 'user_id' = ':user_id' "); 
-            $stmt ->bindparam(":taak", $taak);
-            $stmt ->bindparam(":uren", $uren);
-            $stmt ->bindparam(":omschrijving", $omschrijving);
-            $stmt ->bindparam(":user_id", $user_id);
-            $stmt->execute();
-            return $stmt;
-        }catch(PDOException $e){
-            echo $e->getMessage();
+            $conn = (new DB)->connect();
+            $stmt = $conn->prepare("SELECT * FROM urenschrijven WHERE user_id = ?");
+            $stmt->execute([$id]);
+            $result = $stmt->fetch();
+            $conn = null;
+
+            return $result;
+
         }
-    }
-    // verwijderen van een unit
-    public function delete($user_id){
-        try{
-            $stmt = $this->conn->prepare("DELETE FROM urenschrijven WHERE user_id = :user_id "); 
-            $stmt ->bindparam(":user_id", $user_id);
-            return $stmt;
-        }catch(PDOException $e){
-            echo $e->getMessage();
+        catch (PDOException $e) {
+            echo json_encode([ 
+                'error' => $e->getMessage(),
+
+            ]);
+
+            print "Error!: " . $e->getMessage() . "<br/>";
         }
+        exit;
     }
 
-    public function redirect($url){
-        header("Location: $url");
+
+    public function getAllrecords() {
+        try{
+            $conn = (new DB)->connect();
+            $stmt = $conn->query("SELECT * FROM urenschrijven");
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $conn = null;
+            return $result;
+
+        }
+        catch (PDOException $e) {
+            echo json_encode([
+                'error' => $e->getMessage(),
+            ]);
+    
+            print "Error!: " . $e->getMessage() . "<br/>";
+        }
+        exit;
     }
 }
+
+
+
 ?>

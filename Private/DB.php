@@ -7,6 +7,11 @@ class DB
         $user = 'root';
         $pass = '';
 
-        return new PDO($dns, $user, $pass);
+       try{
+           $conn = new PDO ($dns, $user, $pass);
+           return $conn;
+       }catch (PDOException $e) {
+           echo "Er is een fout met de verbinding: " . $e->getMessage();
+       }
     }
 }

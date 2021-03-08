@@ -18,9 +18,7 @@ if(isset($_POST['register'])){
         return false;
     }
 }
-
 ?>
-
 
 <div class="container container-center">
 <div class="loginCard">
