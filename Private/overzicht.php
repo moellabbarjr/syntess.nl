@@ -1,33 +1,10 @@
 <?php
   include("../layout/header.php");
   include("../Private/User.php");
-  if (!isset($_SESSION)) {
+  if (!isset($_SESSION['first_name'])) {
     session_start();
   }
-  if(!$_SESSION['first_name']){
-    $deny = true;
-    echo("Er is iets fout gegaan met het inloggen, probeer het opnieuw. U word over 5 seconden terug gestuurd.");
-    header("refresh:5;url=login.php");
-  }
-
-$records = (new User)->getAllrecords();
-$deny = false;
-switch($_SESSION['role']){
-    case NULL:
-        $deny = true;
-        echo("Er is iets fout gegaan met het inloggen, probeer het opnieuw. U word over 5 seconden terug gestuurd.");
-        header("refresh:6;url=login.php");
-        break;
-    case "user":
-    case "user":
-        $deny = true;
-        echo("Over 5 seconden word u teruggestuurd naar uw overzicht.");
-        header("refresh:5;url=overzicht.php");
-        break;
-}
-
-if($deny == false){
-
+ $records = (new User)->getAllrecords();
 ?>
 
 
@@ -40,7 +17,7 @@ if($deny == false){
     </ul>
   </nav>
 </body>
-<p class="welcomeUserMessage"> Welkom <?=$_SESSION['first_name']?></p>
+<p class="welcomeUserMessage">Welkom <?=$_SESSION['first_name']?></p>
 
 <h2 class="h2_text">Urenoverzicht</h2>
 
@@ -67,7 +44,7 @@ if($deny == false){
                 echo '<th>' . $record["uren"] . '</th>';
                 echo '<th>' . $record["omschrijving"] . '</th>';
                 echo '<td>
-                <button type="button" class="btn btn-danger"><a href="deleteUser.php?user_id=' . $record["user_id"] . '">Verwijderen</a></button>
+                <button type="button" class="btn btn-danger"><a href="deleterecords.php?user_id=' . $record["user_id"] . '">Verwijderen</a></button>
                     </td>';
                 echo '</tr>';
               }
@@ -76,6 +53,3 @@ if($deny == false){
     </table>
 
 </div>
-<?php
-}
-?>

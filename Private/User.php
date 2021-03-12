@@ -128,7 +128,24 @@ class User
             echo json_encode([
                 'error' => $e->getMessage(),
             ]);
-    
+            print "Error!: " . $e->getMessage() . "<br/>";
+        }
+        exit;
+    }
+    public function deleterecords($id){
+        try{
+            $conn = (new DB)->connect();
+            $stmt = $conn->prepare("DELETE FROM urenschrijven WHERE user_id = ? ");
+            $stmt->execute([$id]);
+            $conn = null;
+            return true;
+
+        }
+        catch (PDOException $e) {
+            echo json_encode([ 
+                'error' => $e->getMessage(),
+            ]);
+
             print "Error!: " . $e->getMessage() . "<br/>";
         }
         exit;
