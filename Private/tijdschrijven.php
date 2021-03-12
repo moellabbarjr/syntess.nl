@@ -34,6 +34,10 @@ require_once "User.php";
             <label for="omschrijving">Omschrijving:</label>
             <input class="form-control" type="text" name="omschrijving" id="omschrijving" placeholder="Taak omschrijving" value="">
         </div>
+        <div class="form-group">
+            <label for="taak">Datum:</label>
+            <input class="form-control" type="date" name="Datum" id="Datum" value="">
+        </div>
   
             <input class="btn btn-primary mb-2" type="submit" name="btn_save" value="Opslaan!">                    
         </form> 

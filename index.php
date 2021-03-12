@@ -1,14 +1,13 @@
-<?php include("layout/header.php"); 
+<?php
 
+include("layout/header.php"); 
 include("Private/User.php");
-// include("Private/DB.php");
 
 $login = (new User);
 
 if(isset($_POST['submit'])){
   $email = htmlspecialchars($_POST['email']);
   $password = htmlspecialchars($_POST['password']);
-    
   $login->login($email,$password);
 }
 ?>

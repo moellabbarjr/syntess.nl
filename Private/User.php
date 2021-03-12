@@ -1,13 +1,13 @@
 <?php
 
-require_once "DB.php";
+include("DB.php");
 
 class User
 {
     //Function to register a user
     public function register($email,$firstname,$lastname,$password) {
         try{
-            $conn = DB::connect();
+            $conn = (new DB)->connect();
 
             $stmt= $conn->prepare("SELECT * FROM `user` WHERE email = ?");
             $stmt->execute([$email]);
@@ -38,9 +38,8 @@ class User
     //Function to login a user
     public function login($email,$password){
         try {
-            $connection = DB::connect();
-
-            $stmt= $connection->prepare("SELECT * FROM `user` WHERE email = ?");
+            $conn = (new DB)->connect();
+            $stmt= $conn->prepare("SELECT * FROM user WHERE email = ?");
             $stmt->execute([$email]);
             $result = $stmt->fetchAll();
             
@@ -50,8 +49,7 @@ class User
                     $_SESSION["loggedin"] = $result[0][0];
                     $_SESSION["role"] = $result[0][5];
                     $_SESSION["job_role"] = $result[0][6];
-                    $_SESSION['first_name'] = $result[0][2];
-                    $_SESSION['last_name'] = $result[0][2];
+                    $_SESSION['name'] = $result[0][2];
                     if ($result[0][5] == 1) {
                         header("Location: Private/overzicht.php");
                     }
@@ -68,15 +66,6 @@ class User
     exit;
     }
 
-    private $conn;
-
-    //contructor
-    public function __construct(){
-        $database = new DB();
-        $db = $database->connect();
-        $this->conn = $db;
-
-    }
 
     //uitvoering sql query
     public function runQuery($sql){

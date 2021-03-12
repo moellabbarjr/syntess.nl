@@ -54,6 +54,7 @@ if($deny == false){
             <th>Taak:</th>
             <th>Uren:</th>
             <th>Omschrijving:</th>
+            <th>Optie</th>
         </tr>
         </thead>
         <tbody>
@@ -65,8 +66,11 @@ if($deny == false){
 
                 echo '<th>' . $record["uren"] . '</th>';
                 echo '<th>' . $record["omschrijving"] . '</th>';
+                echo '<td>
+                <button type="button" class="btn btn-danger"><a href="deleteUser.php?user_id=' . $record["user_id"] . '">Verwijderen</a></button>
+                    </td>';
                 echo '</tr>';
-            }
+              }
         ?>
         </tbody>
     </table>

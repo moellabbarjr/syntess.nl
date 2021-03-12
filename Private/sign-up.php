@@ -1,7 +1,6 @@
 <?php include("../layout/header.php"); 
 
-include("../Private/User.php");
-include("../Private/DB.php");
+
 
 $user = (new user);
 
