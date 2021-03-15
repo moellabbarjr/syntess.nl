@@ -10,7 +10,7 @@ switch($_SESSION['role']){
     case "2":
      
     case "3":
-        $user = (new User)->deleterecords($_GET['user_id']);
+        $user = (new User)->deleterecords($_GET['uren_id']);
         header("location:overzicht.php");
 
 }

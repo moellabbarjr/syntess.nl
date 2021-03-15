@@ -2,7 +2,7 @@
   include("../layout/header.php");
   include("../Private/User.php");
   if (!isset($_SESSION['first_name'])) {
-    session_start();
+   
   }
  $records = (new User)->getAllrecords();
 ?>
@@ -17,16 +17,17 @@
     </ul>
   </nav>
 </body>
-<p class="welcomeUserMessage">Welkom <?=$_SESSION['first_name']?></p>
-
+<div class="welkommes">
+  <?php echo "Welkom " . $_SESSION['first_name'];?> <br>
+</div>
 <h2 class="h2_text">Urenoverzicht</h2>
+
 
 
 <div class="container">
     <table class="table table-striped table-responsive-md btn-table">
         <thead>
         <tr>
-
             <th>Datum:</th>
             <th>Taak:</th>
             <th>Uren:</th>
@@ -44,7 +45,7 @@
                 echo '<th>' . $record["uren"] . '</th>';
                 echo '<th>' . $record["omschrijving"] . '</th>';
                 echo '<td>
-                <button type="button" class="btn btn-danger"><a href="deleterecords.php?user_id=' . $record["user_id"] . '">Verwijderen</a></button>
+                <button type="button" class="btn_del"><a href="deleterecords.php?user_id=' . $record["uren_id"] . '">Verwijderen</a></button>
                     </td>';
                 echo '</tr>';
               }

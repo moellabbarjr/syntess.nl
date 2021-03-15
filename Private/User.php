@@ -47,9 +47,11 @@ class User
                 if (password_verify($password, $result[0][4])) {
                     $_SESSION["sessionid"] = session_id();
                     $_SESSION["loggedin"] = $result[0][0];
+                    $_SESSION["first_name"] = $result[0][2];
+                    $_SESSION["last_name"] = $result[0][3];
                     $_SESSION["role"] = $result[0][5];
                     $_SESSION["job_role"] = $result[0][6];
-                    $_SESSION['name'] = $result[0][2];
+                    // $_SESSION['user_id'] = $result[0][0];
                     if ($result[0][5] == 1) {
                         header("Location: Private/overzicht.php");
                     }
@@ -75,13 +77,15 @@ class User
     }
     
     //invoeren van gegevens functie
-    public function insert($user_id, $taak, $uren, $omschrijving){
+    public function insert($user_id, $taak, $uren, $omschrijving, $Datum){
         try{
-            $stmt = $this->conn->prepare("INSERT INTO urenschrijven (user_id, taak, uren, omschrijving) VALUES (:user_id ,:taak, :uren, :omschrijving) ");
+            $conn = (new DB)->connect();
+            $stmt = $conn->prepare("INSERT INTO urenschrijven (user_id, datum, taak, uren, omschrijving) VALUES (:user_id, :datum, :taak, :uren, :omschrijving) ");
             $stmt->bindparam(":user_id", $user_id);
             $stmt->bindparam(":taak", $taak);
             $stmt->bindparam(":uren", $uren);
             $stmt->bindparam(":omschrijving", $omschrijving);
+            $stmt->bindparam(":datum", $Datum);
             $stmt->execute();
             // var_dump($user_id);
             // exit('gaat iets fout');
@@ -118,7 +122,7 @@ class User
     public function getAllrecords() {
         try{
             $conn = (new DB)->connect();
-            $stmt = $conn->query("SELECT * FROM urenschrijven");
+            $stmt = $conn->query("SELECT * FROM urenschrijven ORDER BY datum ASC ");
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
             $conn = null;
             return $result;
@@ -135,7 +139,7 @@ class User
     public function deleterecords($id){
         try{
             $conn = (new DB)->connect();
-            $stmt = $conn->prepare("DELETE FROM urenschrijven WHERE user_id = ? ");
+            $stmt = $conn->prepare("DELETE FROM urenschrijven WHERE 'uren_id' = ? ");
             $stmt->execute([$id]);
             $conn = null;
             return true;

@@ -1,10 +1,25 @@
 <?php
-  include("../layout/header.php");
-  if (!isset($_SESSION)) {
-    session_start();
+
+include("User.php");
+include("../layout/header.php");
+ 
+  if (!isset($_SESSION['loggedin'])) {
+   
 }
 
-require_once "User.php";
+
+$user = (new User);
+
+if(isset($_POST['btn_save'])){
+  $user_id = htmlspecialchars($_POST['user_id']);
+  $taak = htmlspecialchars($_POST['taak']);
+  $uren = htmlspecialchars($_POST['uren']);
+  $omschrijving = htmlspecialchars($_POST['omschrijving']);
+  $Datum = htmlspecialchars($_POST['Datum']);
+  $user->insert($user_id,$taak,$uren,$omschrijving,$Datum);
+}
+
+
 
 ?>
 
@@ -19,9 +34,16 @@ require_once "User.php";
     <div class="container container-center">
     <div class="loginCard">
 
+  
         <h1 style="margin-top: 10px; text-align: center;">Tijdschrijven</h1>
         <p>Vul hier u gegevens in</p>
         <form method="POST">
+        <div class="form-group">
+        <label for="user_id">
+        <?php echo "Uw user ID is: nr " . $_SESSION['loggedin'];?> <br>
+        </label>
+            <input class="form-control" type="text" name="user_id" id="user_id" placeholder="Vul hier uw user ID in" value="">
+        </div>
         <div class="form-group">
             <label for="taak">Taak:</label>
             <input class="form-control" type="text" name="taak" id="taak" placeholder="Taak" value="">
@@ -36,7 +58,7 @@ require_once "User.php";
         </div>
         <div class="form-group">
             <label for="taak">Datum:</label>
-            <input class="form-control" type="date" name="Datum" id="Datum" value="">
+            <input class="form-control" type="text" name="Datum" id="Datum" placeholder="mm/dd/yyyy" value="">
         </div>
   
             <input class="btn btn-primary mb-2" type="submit" name="btn_save" value="Opslaan!">                    
