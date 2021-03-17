@@ -1,6 +1,6 @@
 .loginCard {
   box-shadow: 0px 3px 6px rgba(000, 000, 000, 0.3) !important;
-  border: 2px solid #e3464c !important;
+  border: 2px solid aqua !important;
   border-radius: 20px !important;
   padding: 69px !important;
   margin: 0 auto !important;
@@ -8,13 +8,12 @@
 
 .loginCard .title {
   font-size: 30px;
-  color: #a81010;
-  margin-bottom: 20px;
+  color: black;
+  text-align: center;
+  padding-bottom: 15px;
+
 }
 
-.loginCard {
-  margin-bottom: 15px;
-}
 
 .loginCard label {
   color: black;
@@ -29,7 +28,6 @@
   border-radius: 20px;
   padding: 5px 10px;
   font-size: 20px;
-  /* width: 300px; */
   outline: none;
   margin-left: 0.5rem;
 }
@@ -54,8 +52,10 @@
 }
 
 .loginCard .button-container button:hover {
-  background-color: #e3464c;
-  border-color: #e3464c;
+  background-color: lightblue;
+  color: white;
+  border: 1px solid transparent;
+  transition: 0.7s;
 }
 .alinger {
   margin-left: 1.0rem;

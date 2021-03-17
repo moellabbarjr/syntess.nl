@@ -7,7 +7,6 @@
  $records = (new User)->getAllrecords();
 ?>
 
-
 <body>
   <nav>
     <ul>
@@ -18,12 +17,9 @@
   </nav>
 </body>
 <div class="welkommes">
-  <?php echo "Welkom " . $_SESSION['first_name'];?> <br>
+  <?php echo "Welkom terug " . $_SESSION['first_name'];?> <br>
 </div>
 <h2 class="h2_text">Urenoverzicht</h2>
-
-
-
 <div class="container">
     <table class="table table-striped table-responsive-md btn-table">
         <thead>
@@ -36,20 +32,17 @@
         </tr>
         </thead>
         <tbody>
-        <?php 
-            foreach ($records as $record) {
-                echo '<tr>';
-                echo '<th scope="row">' . $record["datum"] . '</th>';
-                echo '<th>' . $record["taak"] . '</th>';
-
-                echo '<th>' . $record["uren"] . '</th>';
-                echo '<th>' . $record["omschrijving"] . '</th>';
-                echo '<td>
-                <button type="button" class="btn_del"><a href="deleterecords.php?user_id=' . $record["uren_id"] . '">Verwijderen</a></button>
-                    </td>';
-                echo '</tr>';
-              }
-        ?>
+          <?php 
+              foreach ($records as $record) {
+                  echo '<tr>';
+                  echo '<th scope="row">' . $record["datum"] . '</th>';
+                  echo '<th>' . $record["taak"] . '</th>';
+                  echo '<th>' . $record["uren"] . '</th>';
+                  echo '<th>' . $record["omschrijving"] . '</th>';
+                  echo '<td><button type="button" class="btn_del"><a href="deleterecords.php?uren_id=' . $record["uren_id"] . '">Verwijderen</a></button></td>';
+                  echo '</tr>';
+                }
+            ?>
         </tbody>
     </table>
 

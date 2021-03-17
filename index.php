@@ -27,7 +27,6 @@ if(isset($_POST['submit'])){
           </div>
           <div class="button-container">
             <button id="loginBtn" name="submit" class="submit" type="submit">Inloggen</button>
-            <a href="Private/sign-up.php"><button type="button" name="login" class="btn">Registreren</button></a>
           </div>
           
         </form>

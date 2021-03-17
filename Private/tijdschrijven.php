@@ -33,16 +33,13 @@ if(isset($_POST['btn_save'])){
   </nav>
     <div class="container container-center">
     <div class="loginCard">
-
-  
-        <h1 style="margin-top: 10px; text-align: center;">Tijdschrijven</h1>
-        <p>Vul hier u gegevens in</p>
+        <h1 style="text-align: center;">Tijdschrijven</h1>
         <form method="POST">
         <div class="form-group">
         <label for="user_id">
-        <?php echo "Uw user ID is: nr " . $_SESSION['loggedin'];?> <br>
+        <?php echo "Uw ID is: nr " . $_SESSION['loggedin'];?> <br>
         </label>
-            <input class="form-control" type="text" name="user_id" id="user_id" placeholder="Vul hier uw user ID in" value="">
+            <input class="form-control" type="text" name="user_id" id="user_id" placeholder="Vul hier uw ID in" value="">
         </div>
         <div class="form-group">
             <label for="taak">Taak:</label>
@@ -58,7 +55,12 @@ if(isset($_POST['btn_save'])){
         </div>
         <div class="form-group">
             <label for="taak">Datum:</label>
-            <input class="form-control" type="text" name="Datum" id="Datum" placeholder="mm/dd/yyyy" value="">
+            <input class="form-control" type="text" name="Datum" id="Datum" placeholder="mm-dd-yy" value="">
+            <div class="datumstamp">
+              <?php 
+                echo "De datum van vandaag:  " . date("d/m/y") . "<br>";
+              ?>
+            </div>
         </div>
   
             <input class="btn btn-primary mb-2" type="submit" name="btn_save" value="Opslaan!">                    

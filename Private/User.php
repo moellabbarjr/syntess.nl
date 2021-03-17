@@ -17,7 +17,7 @@ class User
                 $hash = password_hash($password, PASSWORD_DEFAULT);
                 $stmt = $conn->prepare("INSERT INTO user (email, first_name, last_name, `password`,`job_role`, role) VALUES (?,?,?,?,?,?)");
                 $stmt->execute([$email, $firstname, $lastname, $hash, 99, 1]);
-                header("Location: ../index.php");
+                header("Location: Admindash.php");
             } else {
                 return "false";
                 header("sign-up.php");
@@ -48,14 +48,13 @@ class User
                     $_SESSION["sessionid"] = session_id();
                     $_SESSION["loggedin"] = $result[0][0];
                     $_SESSION["first_name"] = $result[0][2];
-                    $_SESSION["last_name"] = $result[0][3];
                     $_SESSION["role"] = $result[0][5];
                     $_SESSION["job_role"] = $result[0][6];
-                    // $_SESSION['user_id'] = $result[0][0];
                     if ($result[0][5] == 1) {
                         header("Location: Private/overzicht.php");
-                    }
-                   
+                    } else if($result[0][5] == 2){
+                        header("Location: adminpanel/Admindash.php");
+                    }                 
                 }
             }
         } catch (PDOException $e) {
@@ -68,14 +67,6 @@ class User
     exit;
     }
 
-
-    //uitvoering sql query
-    public function runQuery($sql){
-      
-        $stmt = $this->conn->prepare($sql);
-        return $stmt;
-    }
-    
     //invoeren van gegevens functie
     public function insert($user_id, $taak, $uren, $omschrijving, $Datum){
         try{
@@ -86,43 +77,18 @@ class User
             $stmt->bindparam(":uren", $uren);
             $stmt->bindparam(":omschrijving", $omschrijving);
             $stmt->bindparam(":datum", $Datum);
-            $stmt->execute();
-            // var_dump($user_id);
-            // exit('gaat iets fout');
-         
+            $stmt->execute();       
             return $stmt;
         }catch(PDOException $e){
             echo $e->getMessage();
         }
     }
 
-    public function getrecordsbyid($id) {
-        try{
-            $conn = (new DB)->connect();
-            $stmt = $conn->prepare("SELECT * FROM urenschrijven WHERE user_id = ?");
-            $stmt->execute([$id]);
-            $result = $stmt->fetch();
-            $conn = null;
-
-            return $result;
-
-        }
-        catch (PDOException $e) {
-            echo json_encode([ 
-                'error' => $e->getMessage(),
-
-            ]);
-
-            print "Error!: " . $e->getMessage() . "<br/>";
-        }
-        exit;
-    }
-
-
+    //functie om alle records weer te geven
     public function getAllrecords() {
         try{
             $conn = (new DB)->connect();
-            $stmt = $conn->query("SELECT * FROM urenschrijven ORDER BY datum ASC ");
+            $stmt = $conn->query("SELECT * FROM urenschrijven ORDER BY datum DESC ");
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
             $conn = null;
             return $result;
@@ -136,14 +102,34 @@ class User
         }
         exit;
     }
+
+    //functie om alle users op te halen voor de admin
+    public function getAllusers() {
+        try{
+            $conn = (new DB)->connect();
+            $stmt = $conn->query("SELECT * FROM user");
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $conn = null;
+            return $result;
+
+        }
+        catch (PDOException $e) {
+            echo json_encode([
+                'error' => $e->getMessage(),
+            ]);
+            print "Error!: " . $e->getMessage() . "<br/>";
+        }
+        exit;
+    }
+
+    //functie om een records te verwijderen
     public function deleterecords($id){
         try{
             $conn = (new DB)->connect();
-            $stmt = $conn->prepare("DELETE FROM urenschrijven WHERE 'uren_id' = ? ");
+            $stmt = $conn->prepare("DELETE FROM urenschrijven WHERE uren_id = ? ");
             $stmt->execute([$id]);
             $conn = null;
             return true;
-
         }
         catch (PDOException $e) {
             echo json_encode([ 
@@ -154,7 +140,69 @@ class User
         }
         exit;
     }
+
+    // functie om een user te verwijderen
+    public function deleteuser($id){
+        try{
+            $conn = (new DB)->connect();
+            $stmt = $conn->prepare("DELETE FROM user WHERE user_id = ? ");
+            $stmt->execute([$id]);
+            $conn = null;
+            return true;
+        }
+        catch (PDOException $e) {
+            echo json_encode([ 
+                'error' => $e->getMessage(),
+            ]);
+    
+            print "Error!: " . $e->getMessage() . "<br/>";
+        }
+        exit;
+    }
+
+    public function getUserById($id) {
+        try{
+            $conn = (new DB)->connect();
+            $stmt = $conn->prepare("SELECT * FROM user WHERE user_id  = ?");
+            $stmt->execute([$id]);
+            $result = $stmt->fetch();
+            $conn = null;
+            return $result;
+
+        }
+        catch (PDOException $e) {
+            echo json_encode([ 
+                'error' => $e->getMessage(),
+
+            ]);
+
+            print "Error!: " . $e->getMessage() . "<br/>";
+        }
+        exit;
+    }
+
+    public function updateUser($id, $email, $firstName, $lastName, $role) {
+        try{
+            $conn = (new DB)->connect();
+            $stmt = $conn->prepare("UPDATE user SET email=?, first_name=?, last_name=?, role=? WHERE user_id = ? ");
+            $stmt->execute([$email, $firstName, $lastName, $role, $id]);
+            $conn = null;
+            return true;
+            header("Location: user_overzicht.php");
+
+        }
+        catch (PDOException $e) {
+            echo json_encode([ 
+                'error' => $e->getMessage(),
+
+            ]);
+
+            print "Error!: " . $e->getMessage() . "<br/>";
+        }
+        exit;
+    }
 }
+
 
 
 
