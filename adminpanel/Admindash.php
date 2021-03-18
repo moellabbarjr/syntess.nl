@@ -2,8 +2,19 @@
   include("../layout/header.php");
   include("../Private/User.php");
   if (!isset($_SESSION)) {
-   
+    session_start();
   }
+
+  $deny = false;
+switch($_SESSION['role']){
+    case NULL:
+        $deny = true;
+        echo("Uw heeft niet de rechten om dit te zien, over 3 seconden word u teruggestuurd naar uw dashboard.");
+        header("refresh:3;url=../index.php");
+        break;
+}
+
+if($deny == false){
 
 
  
@@ -22,3 +33,6 @@
 <div class="welkomadmin">
   <?php echo "Welkom terug " . $_SESSION['first_name'];?> <br>
 </div>
+<?php
+} 
+?>

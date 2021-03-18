@@ -1,26 +1,33 @@
 <?php
 
-include("User.php");
-include("../layout/header.php");
- 
+  include("User.php");
+  include("../layout/header.php");
+
   if (!isset($_SESSION['loggedin'])) {
-   
-}
+    
+  }
 
+  $user = (new User);
 
-$user = (new User);
+  $deny = false;
+  switch($_SESSION['role']){
+  case NULL:
+      $deny = true;
+      echo("Uw heeft niet de rechten om dit te zien, over 5 seconden word u teruggestuurd naar uw dashboard.");
+      header("refresh:5;url=../index.php");
+      break;
+  }
 
-if(isset($_POST['btn_save'])){
+  if(isset($_POST['btn_save'])){
   $user_id = htmlspecialchars($_POST['user_id']);
   $taak = htmlspecialchars($_POST['taak']);
   $uren = htmlspecialchars($_POST['uren']);
   $omschrijving = htmlspecialchars($_POST['omschrijving']);
   $Datum = htmlspecialchars($_POST['Datum']);
   $user->insert($user_id,$taak,$uren,$omschrijving,$Datum);
-}
+  }
 
-
-
+  if($deny == false){
 ?>
 
 <body>
@@ -62,8 +69,10 @@ if(isset($_POST['btn_save'])){
               ?>
             </div>
         </div>
-  
             <input class="btn btn-primary mb-2" type="submit" name="btn_save" value="Opslaan!">                    
         </form> 
 
 </body>
+<?php
+} 
+?>

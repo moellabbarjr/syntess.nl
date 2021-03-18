@@ -82,3 +82,9 @@ body {
     width: 100%;
     text-align: center;
 }
+
+.logo{
+    position: relative;
+    left:36%;
+    width: 150px;
+}

@@ -14,9 +14,7 @@ if(isset($_POST['submit'])){
 
 <div class="container container-center">
 <div class="loginCard">
-        <div class="title">
-          <p>Syntess portaal</p>
-        </div>
+   <img class="logo" src="afbeeldingen/logo.png" alt="">
         <form action="" method="POST">
           <div class="form-container">
               <label for="loginEmail">E-mailadres:</label>
@@ -30,7 +28,7 @@ if(isset($_POST['submit'])){
           </div>
           
         </form>
-      </div>
+      </>
 </div>
 
 <?php include("layout/footer.php");?>

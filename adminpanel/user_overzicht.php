@@ -3,7 +3,18 @@
   include("../Private/User.php");
 
   $records = (new User)->getAllusers();
-?>
+
+  $deny = false;
+switch($_SESSION['role']){
+    case NULL:
+        $deny = true;
+        echo("Uw heeft niet de rechten om dit te zien, over 3 seconden word u teruggestuurd naar de inlog pagina.");
+        header("refresh:3;url=../index.php");
+        break;
+}
+
+if($deny == false){
+  ?>
 
 <body>
   <nav>
@@ -49,4 +60,6 @@
     </table>
 
 </div>
-
+<?php
+} 
+?>

@@ -2,19 +2,28 @@
     include("../layout/header.php");
     include("../Private/User.php");
 
+    $deny = false;
+    switch($_SESSION['role']){
+        case NULL:
+            $deny = true;
+            echo("Uw heeft niet de rechten om dit te zien, over 3 seconden word u teruggestuurd naar uw dashboard.");
+            header("refresh:3;url=../index.php");
+            break;
+    }
 
+    if($deny == false){
 
-$user = (new User)->getUserById($_GET["user_id"]);
-if(isset($_POST['submit'])){
-    $email = htmlspecialchars($_POST['email']);
-    $firstname = htmlspecialchars($_POST['firstname']);
-    $lastname = htmlspecialchars($_POST['lastname']);
-    $role = htmlspecialchars($_POST['role']);
-    if((new User)->updateUser($user['user_id'],$email,$firstname,$lastname,$role)){
-    }else{
-        echo "Er ging iets fout met het aanpassen van de gebruiker, probeer het later nog eens.";
-   }
-}
+    $user = (new User)->getUserById($_GET["user_id"]);
+    if(isset($_POST['submit'])){
+        $email = htmlspecialchars($_POST['email']);
+        $firstname = htmlspecialchars($_POST['firstname']);
+        $lastname = htmlspecialchars($_POST['lastname']);
+        $role = htmlspecialchars($_POST['role']);
+        if((new User)->updateUser($user['user_id'],$email,$firstname,$lastname,$role)){
+        }else{
+            echo "Er ging iets fout met het aanpassen van de gebruiker, probeer het later nog eens.";
+    }
+    }
 
 
 ?>
@@ -47,3 +56,6 @@ if(isset($_POST['submit'])){
         </tbody>
     </table>
 </div>
+<?php
+} 
+?>

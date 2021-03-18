@@ -2,10 +2,18 @@
   include("../layout/header.php");
   include("../Private/User.php");
 
+  $deny = false;
+  switch($_SESSION['role']){
+    case NULL:
+        $deny = true;
+        echo("Uw heeft niet de rechten om dit te zien, over 5 seconden word u teruggestuurd naar uw dashboard.");
+        header("refresh:5;url=../index.php");
+        break;
+  }
 
-$user = (new user);
+  $user = (new user);
 
-if(isset($_POST['register'])){
+  if(isset($_POST['register'])){
     $email = htmlspecialchars($_POST['email']);
     $password = htmlspecialchars($_POST['password']);
     $passwordRepeat = htmlspecialchars($_POST['passwordRepeat']);
@@ -17,7 +25,8 @@ if(isset($_POST['register'])){
     }else{
         return false;
     }
-}
+  }
+  if($deny == false){
 ?>
 
 <body>
@@ -31,11 +40,11 @@ if(isset($_POST['register'])){
   </nav>
 </body>
 
+<h2 class="h2_text">User aanmaken</h2>
+
 <div class="container container-center">
 <div class="loginCard">
-        <div class="title">
-          <p>Syntess portaal</p>
-        </div>
+<img class="logo" src="../afbeeldingen/logo.png" alt="">
         <form action="" method="POST">
           <div class="form-container">
               <label for="loginEmail">E-mailadres:</label>
@@ -60,5 +69,6 @@ if(isset($_POST['register'])){
         </form>
       </div>
 </div>
-
-<?php include("layout/footer.php");?>
+<?php
+} 
+?>
