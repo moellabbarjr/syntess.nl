@@ -72,12 +72,6 @@ body {
     text-align: center;
 }
 
-.btn_del{
-    background-color: red;
-    text-decoration: none;
-    color: red;
-}
-
 .datumstamp{
     width: 100%;
     text-align: center;
@@ -87,4 +81,12 @@ body {
     position: relative;
     left:36%;
     width: 150px;
+}
+
+.searchbar{
+    padding: 6px;
+    margin-top: 8px;
+    margin-right: 16px;
+    border: 1px solid gray;
+    font-size: 16px;
 }

@@ -5,6 +5,8 @@
     session_start();
   }
 
+  $records = (new User)->getAllrecords();
+
   $deny = false;
 switch($_SESSION['role']){
     case NULL:
@@ -33,6 +35,38 @@ if($deny == false){
 <div class="welkomadmin">
   <?php echo "Welkom terug " . $_SESSION['first_name'];?> <br>
 </div>
+<div class="container">
+    <br>
+    <table class="table table-striped table-responsive-md btn-table">
+        <thead>
+        <tr>
+            <th>User ID:</th>
+            <th>Datum:</th>
+            <th>Taak:</th>
+            <th>Uren:</th>
+            <th>Omschrijving:</th>
+            <th>Verwijderen</th>
+        </tr>
+        </thead>
+        <tbody>
+          <?php 
+              foreach ($records as $record) {
+                  echo '<tr>';
+                  echo '<th scope="row">' . $record["user_id"] . '</th>';
+                  echo '<th>' . $record["datum"] . '</th>';
+                  echo '<th>' . $record["taak"] . '</th>';
+                  echo '<th>' . $record["uren"] . '</th>';
+                  echo '<th>' . $record["omschrijving"] . '</th>';
+                  echo '<td><button type="button" class="btn btn-danger"><a href="deleterecord.php?uren_id=' . $record["uren_id"] . '">Verwijderen</a></button></td>';
+                  echo '</tr>';
+                }
+            ?>
+        </tbody>
+    </table>
+</div>
+
+
+
 <?php
 } 
 ?>

@@ -1,15 +1,13 @@
 <?php
+  include("layout/header.php"); 
+  include("Private/User.php");
 
-include("layout/header.php"); 
-include("Private/User.php");
-
-$login = (new User);
-
-if(isset($_POST['submit'])){
-  $email = htmlspecialchars($_POST['email']);
-  $password = htmlspecialchars($_POST['password']);
-  $login->login($email,$password);
-}
+  $login = (new User);
+  if(isset($_POST['submit'])){
+    $email = htmlspecialchars($_POST['email']);
+    $password = htmlspecialchars($_POST['password']);
+    $login->login($email,$password);
+  }
 ?>
 
 <div class="container container-center">

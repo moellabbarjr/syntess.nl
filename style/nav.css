@@ -32,8 +32,7 @@ li a {
 }
 
 li a:hover {
-  background-color: lightgray;
-  color: white;
-  text-decoration: none;
+  color: blue;
+  text-decoration: underline;
   border-radius: 25px;
 }

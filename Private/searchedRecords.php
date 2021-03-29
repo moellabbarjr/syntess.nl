@@ -2,10 +2,11 @@
   include("../layout/header.php");
   include("../Private/User.php");
   if (!isset($_SESSION['first_name'])) {
-
+    
   }
+  $search = $_GET['search'];
 
-  $records = (new User)->getAllrecordsbyid();
+  $searchedUsers = (new User)->searchRecords($search);
   
   $deny = false;
   switch($_SESSION['role']){
@@ -27,14 +28,12 @@
     </ul>
   </nav>
 </body>
-<div class="welkommes">
-  <?php echo "Welkom terug " . $_SESSION['first_name'];?> <br>
-</div>
+
 <h2 class="h2_text">Urenoverzicht</h2>
 <div class="container">
 <div class="searchdiv">
         <form method="GET" action="searchedRecords.php">
-            <input type="text" placeholder="Zoeken..." class="searchbar" name="search"><button class="btn btn-primary search-btn" name="submit">Zoeken</button>
+            <input type="text" placeholder="Zoeken..." class="searchbar" name="search"><button class="searchbar_btn" name="submit">Zoeken</button>
         </form>
     </div>
     <br>
@@ -51,14 +50,14 @@
         </thead>
         <tbody>
           <?php 
-              foreach ($records as $record) {
+              foreach ($searchedUsers as $searchedUser) {
                   echo '<tr>';
-                  echo '<th scope="row">' . $record["datum"] . '</th>';
-                  echo '<th>' . $record["taak"] . '</th>';
-                  echo '<th>' . $record["uren"] . '</th>';
-                  echo '<th>' . $record["omschrijving"] . '</th>';
-                  echo '<td><button type="button" class="btn btn-info"><a href="editrecords.php?uren_id=' . $record["uren_id"] . '">Aanpassen</a></button></td>';
-                  echo '<td><button type="button" class="btn btn-danger"><a href="deleterecords.php?uren_id=' . $record["uren_id"] . '">Verwijderen</a></button></td>';
+                  echo '<th scope="row">' . $searchedUser["datum"] . '</th>';
+                  echo '<th>' . $searchedUser["taak"] . '</th>';
+                  echo '<th>' . $searchedUser["uren"] . '</th>';
+                  echo '<th>' . $searchedUser["omschrijving"] . '</th>';
+                  echo '<td><button type="button" class="btn btn-info"><a href="editrecords.php?uren_id=' . $searchedUser["uren_id"] . '">Aanpassen</a></button></td>';
+                  echo '<td><button type="button" class="btn btn-danger"><a href="deleterecords.php?uren_id=' . $searchedUser["uren_id"] . '">Verwijderen</a></button></td>';
                   echo '</tr>';
                 }
             ?>

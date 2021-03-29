@@ -5,15 +5,15 @@
   $records = (new User)->getAllusers();
 
   $deny = false;
-switch($_SESSION['role']){
-    case NULL:
-        $deny = true;
-        echo("Uw heeft niet de rechten om dit te zien, over 3 seconden word u teruggestuurd naar de inlog pagina.");
-        header("refresh:3;url=../index.php");
-        break;
-}
+  switch($_SESSION['role']){
+      case NULL:
+          $deny = true;
+          echo("Uw heeft niet de rechten om dit te zien, over 3 seconden word u teruggestuurd naar de inlog pagina.");
+          header("refresh:3;url=../index.php");
+          break;
+  }
 
-if($deny == false){
+  if($deny == false){
   ?>
 
 <body>
@@ -27,14 +27,17 @@ if($deny == false){
   </nav>
 </body>
 
-
-
-
 <h2 class="h2_text">User overzicht</h2>
 <div class="container">
+  <div class="searchdiv">
+        <form method="GET" action="searchedUser.php">
+            <input type="text" placeholder="Zoeken..." class="searchbar" name="search"><button class="btn btn-primary search-btn" name="submit">Zoeken</button>
+        </form>
+    </div>
     <table class="table table-striped table-responsive-md btn-table">
         <thead>
         <tr>
+            <th>User ID:</th>
             <th>Email:</th>
             <th>Voornaam:</th>
             <th>Achternaam:</th>
@@ -47,7 +50,8 @@ if($deny == false){
           <?php 
               foreach ($records as $record) {
                   echo '<tr>';
-                  echo '<th scope="row">' . $record["email"] . '</th>';
+                  echo '<th scope="row">' . $record["user_id"] . '</th>';
+                  echo '<th>' . $record["email"] . '</th>';
                   echo '<th>' . $record["first_name"] . '</th>';
                   echo '<th>' . $record["last_name"] . '</th>';
                   echo '<th>' . $record["role"] . '</th>';

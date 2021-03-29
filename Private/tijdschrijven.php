@@ -19,12 +19,12 @@
   }
 
   if(isset($_POST['btn_save'])){
-  $user_id = htmlspecialchars($_POST['user_id']);
+  // $user_id = htmlspecialchars($_POST['user_id']);
   $taak = htmlspecialchars($_POST['taak']);
   $uren = htmlspecialchars($_POST['uren']);
   $omschrijving = htmlspecialchars($_POST['omschrijving']);
   $Datum = htmlspecialchars($_POST['Datum']);
-  $user->insert($user_id,$taak,$uren,$omschrijving,$Datum);
+  $user->insert($taak,$uren,$omschrijving,$Datum);
   }
 
   if($deny == false){
@@ -42,12 +42,12 @@
     <div class="loginCard">
         <h1 style="text-align: center;">Tijdschrijven</h1>
         <form method="POST">
-        <div class="form-group">
+        <!-- <div class="form-group">
         <label for="user_id">
         <?php echo "Uw ID is: nr " . $_SESSION['loggedin'];?> <br>
         </label>
             <input class="form-control" type="text" name="user_id" id="user_id" placeholder="Vul hier uw ID in" value="">
-        </div>
+        </div> -->
         <div class="form-group">
             <label for="taak">Taak:</label>
             <input class="form-control" type="text" name="taak" id="taak" placeholder="Taak" value="">
@@ -62,7 +62,7 @@
         </div>
         <div class="form-group">
             <label for="taak">Datum:</label>
-            <input class="form-control" type="text" name="Datum" id="Datum" placeholder="mm-dd-yy" value="">
+            <input class="form-control" type="date" name="Datum" id="Datum" value="">
             <div class="datumstamp">
               <?php 
                 echo "De datum van vandaag:  " . date("d/m/y") . "<br>";
