@@ -1,6 +1,6 @@
 <?php 
- include("../layout/header.php");
- include("../Private/User.php");
+  include("../layout/header.php");
+  include("../Private/Functions.php");
 
 
 switch($_SESSION['role']){
@@ -10,5 +10,6 @@ switch($_SESSION['role']){
     case "2":
     case "3":
         $user = (new User)->deleteuser($_GET['user_id']);
+        
         header("location: user_overzicht.php");
 }

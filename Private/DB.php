@@ -3,9 +3,9 @@ class DB
 {
     public function connect()
     {
-        $dns = 'mysql:host=127.0.0.1;dbname=syntess.nl';
-        $user = 'root';
-        $pass = '';
+        $dns = 'mysql:host=remotemysql.com;dbname=g7swBLPeOv';
+        $user = 'g7swBLPeOv';
+        $pass = '47VWYtxMOW';
 
        try{
            $conn = new PDO ($dns, $user, $pass);

@@ -1,7 +1,6 @@
 <?php
-
-  include("User.php");
-  include("../layout/header.php");
+   include("../layout/header.php");
+   include("Private/Functions.php");
 
   if (!isset($_SESSION['loggedin'])) {
     

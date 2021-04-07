@@ -1,6 +1,6 @@
 <?php
   include("../layout/header.php");
-  include("../Private/User.php");
+  include("../Private/Functions.php");
 
   $search = $_GET['search'];
   $searchedUsers = (new User)->searchUser($search);
@@ -10,7 +10,7 @@
       case NULL:
           $deny = true;
           echo("Uw heeft niet de rechten om dit te zien, over 3 seconden word u teruggestuurd naar de inlog pagina.");
-          header("refresh:3;url=../index.php");
+          header("refresh:1;url=../index.php");
           break;
   }
 

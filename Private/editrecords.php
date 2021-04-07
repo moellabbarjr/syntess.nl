@@ -1,6 +1,6 @@
 <?php
     include("../layout/header.php");
-    include("../Private/User.php");
+    include("Private/Functions.php");
 
     $deny = false;
     switch($_SESSION['role']){
@@ -19,12 +19,11 @@
             $uren = htmlspecialchars($_POST['uren']);
             $omschrijving = htmlspecialchars($_POST['omschrijving']);
             if((new User)->updaterecords($Records['uren_id'],$Datum,$taak,$uren,$omschrijving)){
-            }else{
+            }
+            else{
                 echo "Er ging iets fout met het aanpassen van de gebruiker, probeer het later nog eens.";
         }
     }
-
-
 ?>
   <nav>
     <ul>

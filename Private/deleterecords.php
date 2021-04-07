@@ -1,5 +1,6 @@
-<?php include("../Layout/header.php");
-    include("../Private/User.php");
+<?php 
+   include("../layout/header.php");
+   include("Private/Functions.php");
 
 
 switch($_SESSION['role']){

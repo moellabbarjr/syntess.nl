@@ -1,15 +1,16 @@
 <?php
-    include("../layout/header.php");
-    include("../Private/User.php");
+   include("../layout/header.php");
+   include("../Private/Functions.php");
 
     $deny = false;
     switch($_SESSION['role']){
         case NULL:
             $deny = true;
             echo("Uw heeft niet de rechten om dit te zien, over 3 seconden word u teruggestuurd naar uw dashboard.");
-            header("refresh:3;url=../index.php");
+            header("refresh:1;url=../index.php");
             break;
     }
+
 
     if($deny == false){
 
@@ -20,21 +21,16 @@
             $lastname = htmlspecialchars($_POST['lastname']);
             $role = htmlspecialchars($_POST['role']);
             if((new User)->updateUser($user['user_id'],$email,$firstname,$lastname,$role)){
+                echo "<p style= 'padding-top:15px ; width:100%; font-size:25px; text-align: center;'>Gewijzigde gegevens zijn succesvol doorgevoerd. <br> Fijne dag! " . "</p>";
+                echo "<p style= 'width:100%; font-size:18px; text-align: center;'>U word automatisch terug gestuurd naar de vorige pagina. " . "</p>";
+                header("refresh:3;url=user_overzicht.php");
             }else{
                 echo "Er ging iets fout met het aanpassen van de gebruiker, probeer het later nog eens.";
         }
+    
     }
 ?>
-<body>
-  <nav>
-    <ul>
-      <li><a href="Admindash.php">Dashboard</a></li>
-      <li><a href="sign-up.php">User aanmaken</a></li>
-      <li><a class="active" href="user_overzicht.php">User overzicht</a></li>
-      <li><a href="../Private/loguit.php">Loguit</a></li>
-    </ul>
-  </nav>
-</body>
+
 <h2 class="h2_text">User wijzigen</h2>
 
 
@@ -42,6 +38,7 @@
     <div class="roles">
         <a href="user_overzicht.php"><button class="btn btn-warning goBack">Ga Terug</button><a>
     </div>
+    <br>
     <table class="table table-striped table-responsive-md btn-table">
         <thead>
         <tr>

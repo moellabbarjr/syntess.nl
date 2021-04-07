@@ -14,7 +14,7 @@ class User
                 $hash = password_hash($password, PASSWORD_DEFAULT);
                 $stmt = $conn->prepare("INSERT INTO user (email, first_name, last_name, `password`, role) VALUES (?,?,?,?,?)");
                 $stmt->execute([$email, $firstname, $lastname, $hash, 1]);
-                header("Location: user_overzicht.php");
+               
             } else {
                 return "false";
                 header("sign-up.php");
@@ -56,7 +56,7 @@ class User
             print "Error!: " . $e->getMessage() . "<br/>";
         }
     exit;
-    }
+    } 
 
     //invoeren van gegevens functie
     public function insert($taak, $uren, $omschrijving, $Datum){

@@ -1,13 +1,13 @@
 <?php 
   include("../layout/header.php");
-  include("../Private/User.php");
+  include("../Private/Functions.php");
 
   $deny = false;
   switch($_SESSION['role']){
     case NULL:
         $deny = true;
         echo("Uw heeft niet de rechten om dit te zien, over 5 seconden word u teruggestuurd naar uw dashboard.");
-        header("refresh:5;url=../index.php");
+        header("refresh:1;url=../index.php");
         break;
   }
 
@@ -20,15 +20,18 @@
     $firstname = htmlspecialchars($_POST['firstname']);
     $lastname = htmlspecialchars($_POST['lastname']);
     if($password == $passwordRepeat){
+        echo "<p style= 'padding-top: 25px ; width:100%; font-size: 25px; text-align: center;'> Gebruiker succelvol aangemaakt!" . "</p>";
+        header("refresh:1;url=user_overzicht.php");
         $user->register($email,$firstname,$lastname,$password);
         return true;
     }else{
+        echo "<p style= 'padding-top: 25px ; width:100%; font-size: 25px; text-align: center;'> Er is wat fout gegaan, controleer de ingevoerde gegevens! " . "</p>";
+        header("refresh:2;url=sign-up.php");
         return false;
     }
   }
   if($deny == false){
 ?>
-
 <body>
   <nav>
     <ul>
@@ -48,23 +51,22 @@
         <form action="" method="POST">
           <div class="form-container">
               <label for="loginEmail">E-mailadres:</label>
-              <input id="loginEmail" type="email" placeholder="E-mailadres" name="email" required >
+              <input id="loginEmail" type="email" placeholder="E-mailadres" name="email"  >
 
               <label for="loginPassword" class="align">Voornaam:</label>
-              <input id="loginPassword" type="text" placeholder="Voornaam" name="firstname" class="aligner" required>
+              <input id="loginPassword" type="text" placeholder="Voornaam" name="firstname" class="aligner" >
 
               <label for="loginPassword">Achternaam:</label>
-              <input id="loginPassword" type="text" placeholder="Achternaam" name="lastname" required>
+              <input id="loginPassword" type="text" placeholder="Achternaam" name="lastname" >
 
               <label for="loginPassword">Wachtwoord:</label>
-              <input id="loginPassword" type="password" placeholder="Wachtwoord" name="password" required>
+              <input id="loginPassword" type="password" placeholder="Wachtwoord" name="password" >
 
               <label for="loginPassword">Herhaal Wachtwoord:</label>
-              <input id="loginPassword" type="password" placeholder="Herhaal Wachtwoord" name="passwordRepeat" required>
+              <input id="loginPassword" type="password" placeholder="Herhaal Wachtwoord" name="passwordRepeat" >
           </div>
           <div class="button-container">
             <button type="submit" name="register" class="btn">Aanmelden</button> <br>
-            <a href="sign-up.php"><button type="button" name="Anu" class="btn">Annuleren</button></a>
           </div>
         </form>
       </div>

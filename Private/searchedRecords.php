@@ -1,6 +1,6 @@
 <?php
-  include("../layout/header.php");
-  include("../Private/User.php");
+   include("../layout/header.php");
+   include("Private/Functions.php");
   if (!isset($_SESSION['first_name'])) {
     
   }

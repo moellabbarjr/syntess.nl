@@ -1,6 +1,6 @@
 <?php
   include("../layout/header.php");
-  include("../Private/User.php");
+  include("Private/Functions.php");
   if (!isset($_SESSION['first_name'])) {
 
   }
@@ -15,6 +15,7 @@
       header("refresh:5;url=../index.php");
       break;
   }
+  
   if($deny == false){
 ?>
 
