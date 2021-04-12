@@ -1,6 +1,6 @@
 <?php
     include("../layout/header.php");
-    include("Private/Functions.php");
+    include("Functions.php");
 
     $deny = false;
     switch($_SESSION['role']){

@@ -13,16 +13,7 @@
 <div class="loginCard">
   <img class="logo" src="afbeeldingen/logo.png" alt="">
   <form action="" method="POST">
-    <!-- <div class="form-container">
-        <label for="loginEmail">E-mailadres:</label>
-        <input class="w3-input"  type="text" name="email" placeholder="E-mailadres" required>
-
-        <label for="loginPassword">Wachtwoord:</label>
-        <input id="loginPassword" type="password" name="password" placeholder="Wachtwoord" required>
-    </div> -->
-
-
-    <label>E-mailadres:</label>
+  <label>E-mailadres:</label>
   <input class="w3-input" type="text" name="email" placeholder="E-mailadres" required></p>
   <p>
   <label>Wachtwoord:</label>
