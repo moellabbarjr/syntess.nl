@@ -24,7 +24,7 @@
                 echo "Er ging iets fout met het aanpassen van de gebruiker, probeer het later nog eens.";
         }
     }
-?>
+?> 
   <nav>
     <ul>
       <li><a class="active" href="overzicht.php">Overzicht</a></li>
@@ -51,14 +51,11 @@
         <tbody>
         <form method="POST">
             <tr>
-             
                 <td><input value="<?= $Records['datum']?>" name="datum" type="text" ></td>
                 <td><input value="<?= $Records['taak']?>"name="taak" type="text" ></td>
                 <td><input value="<?= $Records['uren']?>"name="uren" type="text" ></td>
                 <td><input value="<?= $Records['omschrijving']?>"name="omschrijving" type="text" ></td>
-                <?php
-                    echo'<td><button name="submit" class="btn btn-success"></a>Opslaan</button></td>';
-                 ?>
+ 
             </tr>
         </form>
         </tbody>

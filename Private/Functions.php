@@ -43,10 +43,10 @@ class User
                     $_SESSION["first_name"] = $result[0][2];
                     $_SESSION["role"] = $result[0][5];
                     if ($result[0][5] == 1) {
-                        header("Location: Private/overzicht.php");
+                        header("Location: overzicht.php");
                     } else if($result[0][5] == 2){
                         header("Location: adminpanel/Admindash.php");
-                    }                 
+                    }                
                 }
             }
         } catch (PDOException $e) {
@@ -78,7 +78,6 @@ class User
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
             $conn = null;
             return $result;
-
         }
         catch (PDOException $e) {
             echo json_encode([
@@ -169,7 +168,7 @@ class User
             $stmt->execute([$id]);
             $conn = null;
             return true;
-        }
+        } 
         catch (PDOException $e) {
             echo json_encode([ 
                 'error' => $e->getMessage(),

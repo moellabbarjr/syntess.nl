@@ -10,7 +10,7 @@ if ($logged_out = TRUE){
     unset($_SESSION["first_name"]);
   
     echo "<p style= 'padding-top: 25px ; width:100%; font-size: 25px; text-align: center;'> U bent succesvol uitgelogd. <br> Fijne dag " . "</p>";
-    header("refresh:1.3;url=../index.php");
+    header("refresh:1;url=login.php");
     die();
     
 }else{

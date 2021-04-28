@@ -5,7 +5,7 @@
 
   }
 
-  $records = (new User)->getAllrecordsbyid();
+  $records = (new User)->getAllrecords();
   
   $deny = false;
   switch($_SESSION['role']){
